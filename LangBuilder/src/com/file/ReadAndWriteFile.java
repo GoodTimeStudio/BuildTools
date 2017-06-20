@@ -74,7 +74,7 @@ public class ReadAndWriteFile {
 		
 		
 		while(line!= null && line_2!= null){
-			out.write(type+"."+MOD_ID+line+".name"+"="+line_2+";\r\n");
+			out.write(type+"."+MOD_ID+line+".name"+"="+line_2+"\r\n");
 			line=br.readLine();
 			line_2=br_2.readLine();
 			

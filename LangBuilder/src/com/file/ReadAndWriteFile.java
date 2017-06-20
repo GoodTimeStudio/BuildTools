@@ -17,6 +17,9 @@ import com.util.Color;
 public class ReadAndWriteFile {
 
 	public static void init() throws IOException{
+		
+		//English Name
+		
 		String pathname = GetString.GetDesktop()+"/"+GetString.GetInputName();
 		File filename = new File(pathname);
 		InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
@@ -24,30 +27,56 @@ public class ReadAndWriteFile {
 		String line = "";
 		line = br.readLine();
 		
+		//Chinese Name
+		String pathname_2 = GetString.GetDesktop()+"/"+GetString.GetInputName2();
+		File filename_2 = new File(pathname_2);
+		InputStreamReader reader_2 = new InputStreamReader(new FileInputStream(filename_2));
+		BufferedReader br_2 = new BufferedReader(reader_2);
+		String line_2 = "";
+		line_2 = br_2.readLine();
+		
 		String writepath = GetString.GetDesktop()+"/"+GetString.GetOutputName();
 		File writename = new File(writepath);
 		BufferedWriter out = new BufferedWriter(new FileWriter(writename));
 		
 		String type = null;
+		String MOD_ID = null;
 		
 		while(true){
 			Scanner sc = new Scanner(System.in);
-			API.println("请选择你要创建的类型，Item为1，ItemStack为2，输入数字即可。", Color.LightRed);
+			API.println("请选择你要创建的语言，中文为1，英文为2，输入数字即可。", Color.LightPurple);
 			int num = sc.nextInt();
 			if(num == 1){
-				type = "Item";
+				MOD_ID = "productionline.";
 			}
 			
 			if(num == 2){
-				type = "ItemStack";
+				MOD_ID ="";
 			}
 			
 			break;
 		}
 		
-		while(line!= null){
-			out.write("public static "+type+" "+line+";\r\n");
+		while(true){
+			Scanner sc = new Scanner(System.in);
+			API.println("请选择你要创建的物品类型，Item为1，Tile为2(Block选择此项），输入数字即可。", Color.LightRed);
+			int num = sc.nextInt();
+			if(num == 1){
+				type = "item";
+			}
+			
+			if(num == 2){
+				type = "tile";
+			}
+			
+			break;
+		}
+		
+		
+		while(line!= null && line_2!= null){
+			out.write(type+"."+MOD_ID+line+".name"+"="+line_2+";\r\n");
 			line=br.readLine();
+			line_2=br_2.readLine();
 			
 		}
 		
